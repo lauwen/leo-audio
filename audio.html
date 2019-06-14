@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>page-example</title>
+    <link href="./bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <style>
+        .lauwen-audio-container{
+            padding: 0px;
+            -moz-user-select:none;
+            -webkit-user-select:none;
+            user-select:none;   
+        }
+        .lauwen-audio-progress-container{
+            padding: 15px;
+        }
+        .lauwen-audio-progress{
+            height: 4px;
+            margin: 4px 0px;
+            border-radius: 2px;
+            background-color: #f5f5f5;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+            padding: 0px;
+            cursor: pointer;
+        }
+        .lauwen-audio-progress-bar{
+            width: 0px;
+            height: 4px;
+            border-radius: 2px;
+            background-color: greenyellow;
+            position: relative;
+        }
+        .lauwen-audio-progress-cursor{
+            width: 12px;
+            height: 12px;
+            border-radius: 6px;
+            display: block;
+            background-color: red;
+            position: absolute;
+            top: -4px;
+            right: -6px;
+        }
+
+        .lauwen-audio-info{
+            display: flex;
+            padding: 0px 15px;
+        }
+        .lauwen-audio-info-title
+        {
+            line-height: 33px;
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .lauwen-audio-info-time{
+            text-align: right;
+            line-height: 33px;
+            flex: none;
+        }
+        .lauwen-audio-control-container{
+            display: flex;
+            padding: 15px;
+        }
+        .lauwen-audio-tools-bar{
+            padding: 0px;
+            flex: none
+        }
+        .lauwen-audio-tools-bar>i{
+            position: relative;
+            top: -5px;
+            width: 30px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #888888;
+            text-align: center;
+            font-size: 20px;
+        }
+        .lauwen-audio-tools-bar>b{
+            position: unset;
+            width: 30px;
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+            color: #888888;
+            text-align: center;
+            font-size: 30px;
+        }
+        .lauwen-audio-volume{
+            width: 100%;
+            margin-top: 20.5px;
+            padding: 0px;
+            flex: 1
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid" style="margin-top: 15px;">
+        <audio src="./last_summer.mp3" autoplay id="audio" preload="auto" loop></audio>
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body lauwen-audio-container">
+                    <div class="col-md-7 lauwen-audio-progress-container" id="lauwen-audio-progress-container">
+                        <div class="row lauwen-audio-info">
+                            <div class="lauwen-audio-info-title">
+                                去年夏天 - 王大毛
+                            </div>
+                            <div class="lauwen-audio-info-time">
+                                00:00/00:00
+                            </div>
+                        </div>
+                        <div class="col-md-12 lauwen-audio-progress" id="lauwen-audio-progress">
+                            <div class="lauwen-audio-progress-bar" id="lauwen-audio-progress-bar">
+                                <div class="lauwen-audio-progress-cursor"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 lauwen-audio-control-container" id="lauwen-audio-control-container">
+                        <div class="lauwen-audio-tools-bar">
+                            <i class="glyphicon glyphicon-step-backward lauwen-audio-prev"></i>
+                            <b class="glyphicon glyphicon-play lauwen-audio-play"></b>
+                            <i class="glyphicon glyphicon-step-forward lauwen-audio-next"></i>
+                            <i class="glyphicon glyphicon-volume-up lauwen-audio-muted"></i>
+                        </div>
+                        <div class="lauwen-audio-progress lauwen-audio-volume" id="lauwen-audio-volume">
+                            <div class="lauwen-audio-progress-bar" id="lauwen-audio-volume-bar">
+                                <div class="lauwen-audio-progress-cursor"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <select class="form-control">
+        <option>1</option>
+        <option>1</option>
+        <option>1</option>
+    </select>
+</body>
+<script src="./jquery/jquery-3.3.1.min.js"></script>
+<script>
+    var lauwen_audio_obj = document.getElementById('audio');
+    $(function () { 
+        var lauwen_progress_status = false;
+        var lauwen_box_width = $("#lauwen-audio-progress").width();
+        $('#lauwen-audio-progress').mousedown(function (e) {
+            lauwen_progress_status = true;
+            var lauwen_bar_width = e.pageX - $(this).offset().left;
+            lauwen_bar_width = (lauwen_bar_width > lauwen_box_width ) ? lauwen_box_width  : lauwen_bar_width;
+            lauwen_bar_width = (lauwen_bar_width < 0) ? 0 : lauwen_bar_width;
+            $(this).find('#lauwen-audio-progress-bar').css('width', lauwen_bar_width);
+            lauwen_audio_obj.currentTime = ((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration).toFixed(2);
+        })
+        $('#lauwen-audio-progress').mouseup(function (e) {
+            lauwen_progress_status = false;
+        })
+        $('#lauwen-audio-progress-container').mousemove(function (e) {
+            if (lauwen_progress_status) {
+                var lauwen_bar_width = e.pageX -  $('#lauwen-audio-progress').offset().left;
+                lauwen_bar_width = (lauwen_bar_width > lauwen_box_width ) ? lauwen_box_width  : lauwen_bar_width;
+                lauwen_bar_width = (lauwen_bar_width < 0) ? 0 : lauwen_bar_width;
+                $(this).find('#lauwen-audio-progress-bar').css('width', lauwen_bar_width);
+                lauwen_audio_obj.currentTime = ((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration).toFixed(2);
+            } 
+        })
+        $('#lauwen-audio-progress-container').mouseleave(function (e) {
+            lauwen_progress_status = false;
+        })
+        $('#lauwen-audio-progress-container').mouseup(function (e) {
+            lauwen_progress_status = false;
+        })
+        lauwen_audio_obj.addEventListener('timeupdate', function (e) {
+            var lauwen_audio_current_time = lauwen_audio_obj.currentTime;
+            var lauwen_audio_duration = lauwen_audio_obj.duration;
+            $(".lauwen-audio-info-time").text(formatSeconds(lauwen_audio_current_time) + '/' + formatSeconds(lauwen_audio_duration));
+            var lauwen_temp_bar_width = (lauwen_audio_current_time / lauwen_audio_duration) * lauwen_box_width;
+            $('#lauwen-audio-progress-bar').css('width', lauwen_temp_bar_width);
+            
+        })
+
+        var lauwen_volume_status = false;
+        var lauwen_volume_box_width = $("#lauwen-audio-volume").width();
+        $('#lauwen-audio-volume').mousedown(function (e) {
+            lauwen_volume_status = true;
+            var lauwen_volume_bar_width = e.pageX - $(this).offset().left;
+            lauwen_volume_bar_width = (lauwen_volume_bar_width > lauwen_volume_box_width) ? lauwen_volume_box_width : lauwen_volume_bar_width;
+            lauwen_volume_bar_width = (lauwen_volume_bar_width < 0) ? 0 : lauwen_volume_bar_width;
+            $(this).find('#lauwen-audio-volume-bar').css('width', lauwen_volume_bar_width);
+            lauwen_audio_obj.volume = (lauwen_volume_bar_width / lauwen_volume_box_width ).toFixed(2);
+        })
+        $('#lauwen-audio-volume').mouseup(function (e) {
+            lauwen_volume_status = false;
+        })
+        $('#lauwen-audio-control-container').mousemove(function (e) {
+            if (lauwen_volume_status) {
+                var lauwen_volume_bar_width = e.pageX -  $('#lauwen-audio-volume').offset().left;
+                lauwen_volume_bar_width = (lauwen_volume_bar_width > lauwen_volume_box_width) ? lauwen_volume_box_width : lauwen_volume_bar_width;
+                lauwen_volume_bar_width = (lauwen_volume_bar_width < 0) ? 0 : lauwen_volume_bar_width;
+                $(this).find('#lauwen-audio-volume-bar').css('width', lauwen_volume_bar_width);
+                lauwen_audio_obj.volume = (lauwen_volume_bar_width / lauwen_volume_box_width).toFixed(2);
+            } 
+        })
+        $('#lauwen-audio-control-container').mouseleave(function (e) {
+            lauwen_volume_status = false;
+        })
+        $('#lauwen-audio-control-container').mouseup(function (e) {
+            lauwen_volume_status = false;
+        })
+        audio.addEventListener('loadedmetadata', function (e) {
+            lauwen_audio_obj.volume = 0.5;
+            $('#lauwen-audio-volume-bar').css('width', lauwen_audio_obj.volume * lauwen_volume_box_width);
+        })
+        $(document).on("click", ".lauwen-audio-play", function () {
+            if ($(this).hasClass('glyphicon-play')) {
+                lauwen_audio_obj.play();
+                $(this).removeClass('glyphicon-play');
+                $(this).addClass('glyphicon-pause');
+            }else if ($(this).hasClass('glyphicon-pause')) {
+                lauwen_audio_obj.pause();
+                $(this).removeClass('glyphicon-pause');
+                $(this).addClass('glyphicon-play');
+            }
+        })
+        $(document).on("click", ".lauwen-audio-muted", function () {
+            if ($(this).hasClass('glyphicon-volume-off')) {
+                lauwen_audio_obj.muted = false;
+                $(this).removeClass('glyphicon-volume-off');
+                $(this).addClass('glyphicon-volume-up');
+            }else if ($(this).hasClass('glyphicon-volume-up')) {
+                lauwen_audio_obj.muted = true;
+                $(this).removeClass('glyphicon-volume-up');
+                $(this).addClass('glyphicon-volume-off');
+            }
+        })
+    })
+    function formatSeconds(value) {
+        var secondTime = parseInt(value);// 秒
+        var minuteTime = 0;
+        var hourTime = 0;
+        if(secondTime > 59) {
+            minuteTime = parseInt(secondTime / 60);
+            secondTime = parseInt(secondTime % 60);
+            if(minuteTime > 59) {
+                hourTime = parseInt(minuteTime / 60);
+                minuteTime = parseInt(minuteTime % 60);
+            }
+        }
+        if(secondTime > 0) {
+            secondTime = (secondTime < 10) ? (":0" + secondTime) : (":" + secondTime);
+        }else{
+            secondTime = ":00";
+        }
+        if(minuteTime > 0) {
+            minuteTime = (minuteTime < 10) ? ("0" + minuteTime) : minuteTime;
+        }else{
+            minuteTime = "00";
+        }
+        if(hourTime > 0) {
+            hourTime = (hourTime < 10) ? ("0" + hourTime + ":") : (hourTime + ":");
+        }else{
+            hourTime = "";
+        }
+        var result = hourTime + minuteTime + secondTime;
+        return result;
+    }
+    
+
+</script>
+</html>

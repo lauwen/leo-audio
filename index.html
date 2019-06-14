@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>audio-test</title>
+</head>
+<body>
+    <div>
+        <audio src="./last_summer.mp3" autoplay controls id="audio" preload="auto" loop></audio>
+    </div>
+    <input type="input" id="currentTime" disabled value="00:00"/>
+    <input type="input" id="duration" disabled value="00:00"/>
+    <button type="button" onclick="setAudioPlay()">play</button>
+    <button type="button" onclick="setAudioPause()">pause</button>
+    <button type="button" onclick="getAudioInfo()">getAudioInfo</button>
+    <button type="button" onclick="addAudioVolume()">addVolume</button>
+    <button type="button" onclick="subtractAudioVolume()">substractVolume</button>
+    <button type="button" onclick="setAudioMuted()">muted</button>
+    <select id="setProgress">
+        <option value="0">0s</option>
+        <option value="30">30s</option>
+        <option value="55">55s</option>
+        <option value="60">60s</option>
+        <option value="120">120s</option>
+        <option value="180">180s</option>
+        <option value="240">240s</option>
+    </select>
+    <select id="setRate">
+        <option value="0.5">0.5X</option>
+        <option value="1" selected>1.0X</option>
+        <option value="1.5">1.5X</option>
+        <option value="2">2.0X</option>
+    </select>
+
+</body>
+<script src="./jquery/jquery-3.3.1.min.js"></script>
+<script>
+    var audio = document.getElementById('audio');
+    document.getElementById('setRate').addEventListener('click', function (e) {
+        var rate = document.getElementById('setRate').value;
+        audio.playbackRate = rate;
+    }) 
+    document.getElementById('setProgress').addEventListener('click', function (e) {
+        var progress = document.getElementById('setProgress').value;
+        audio.currentTime = progress;
+    }) 
+    audio.addEventListener('timeupdate', function (e) {
+        var currnetTime = document.getElementById('currentTime').value;
+        if (audio.currentTime !== currnetTime){
+            document.getElementById('currentTime').value = formatSeconds(Math.floor(audio.currentTime));
+        }
+    }) 
+    audio.addEventListener('loadedmetadata', function (e) {
+        document.getElementById('duration').value = formatSeconds(audio.duration);
+    }) 
+    function getAudioInfo () {
+        var audio = document.getElementById('audio');
+        console.log("currentTime："+audio.currentTime);
+        console.log("duration："+audio.duration);
+        console.log("rate："+audio.playbackRate);
+    }
+    function setAudioPlay () {
+        var audio = document.getElementById('audio');
+        audio.play();
+    }
+    function setAudioPause () {
+        var audio = document.getElementById('audio');
+        audio.pause();
+    }
+    function addAudioVolume () {
+        var audio = document.getElementById('audio');
+        var currentVolume = audio.volume;
+        if (currentVolume >= 1){
+            audio.volume = 1;
+        }else{
+            audio.volume = (audio.volume + 0.1).toFixed(1);
+            console.log(audio.volume);
+        }
+    }
+    function subtractAudioVolume () {
+        var audio = document.getElementById('audio');
+        var currentVolume = audio.volume;
+        if (currentVolume <= 0){
+            audio.volume = 0;
+        }else{
+            audio.volume = (audio.volume - 0.1).toFixed(1);
+            console.log(audio.volume);
+        }
+    }
+    function setAudioMuted () {
+        var audio = document.getElementById('audio');
+        audio.pause();
+    }
+    function formatSeconds(value) {
+        var secondTime = parseInt(value);// 秒
+        var minuteTime = 0;
+        var hourTime = 0;
+        if(secondTime > 59) {
+            minuteTime = parseInt(secondTime / 60);
+            secondTime = parseInt(secondTime % 60);
+            if(minuteTime > 59) {
+                hourTime = parseInt(minuteTime / 60);
+                minuteTime = parseInt(minuteTime % 60);
+            }
+        }
+        if(secondTime > 0) {
+            secondTime = (secondTime < 10) ? (":0" + secondTime) : (":" + secondTime);
+        }else{
+            secondTime = ":00";
+        }
+        if(minuteTime > 0) {
+            minuteTime = (minuteTime < 10) ? ("0" + minuteTime) : minuteTime;
+        }else{
+            minuteTime = "00";
+        }
+        if(hourTime > 0) {
+            hourTime = (hourTime < 10) ? ("0" + hourTime + ":") : (hourTime + ":");
+        }else{
+            hourTime = "";
+        }
+        var result = hourTime + minuteTime + secondTime;
+        return result;
+    }
+
+    
+
+</script>
+</html>
