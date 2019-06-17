@@ -146,44 +146,48 @@
     var lauwen_audio_obj = document.getElementById('audio');
     $(function () { 
         var lauwen_progress_status = false;
-        var lauwen_audio_play_status = false;
         var lauwen_box_width = $("#lauwen-audio-progress").width();
-        $('#lauwen-audio-progress').mousedown(function (e) {
-            lauwen_progress_status = true;
+        $('#lauwen-audio-progress').click(function (e) {
             var lauwen_bar_width = e.pageX - $(this).offset().left;
             lauwen_bar_width = (lauwen_bar_width > lauwen_box_width ) ? lauwen_box_width  : lauwen_bar_width;
             lauwen_bar_width = (lauwen_bar_width < 0) ? 0 : lauwen_bar_width;
             $(this).find('#lauwen-audio-progress-bar').css('width', lauwen_bar_width);
             lauwen_audio_obj.currentTime = ((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration).toFixed(2);
         })
+        $('#lauwen-audio-progress').mousedown(function (e) {
+            lauwen_progress_status = true;
+        })
         $('#lauwen-audio-progress').mouseup(function (e) {
             lauwen_progress_status = false;
         })
         $('#lauwen-audio-progress-container').mousemove(function (e) {
             if (lauwen_progress_status) {
-                lauwen_audio_play_status = true;
                 var lauwen_bar_width = e.pageX -  $('#lauwen-audio-progress').offset().left;
                 lauwen_bar_width = (lauwen_bar_width > lauwen_box_width ) ? lauwen_box_width  : lauwen_bar_width;
                 lauwen_bar_width = (lauwen_bar_width < 0) ? 0 : lauwen_bar_width;
                 $(this).find('#lauwen-audio-progress-bar').css('width', lauwen_bar_width);
+                var lauwen_audio_want_time = Math.floor((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration);
+                $(".lauwen-audio-info-time").text(formatSeconds(lauwen_audio_want_time) + '/' + formatSeconds(lauwen_audio_obj.duration));
             } 
         })
         $('#lauwen-audio-progress-container').mouseleave(function (e) {
             lauwen_progress_status = false;
         })
         $('#lauwen-audio-progress-container').mouseup(function (e) {
+            if (lauwen_progress_status) {
+                var lauwen_bar_width = e.pageX -  $('#lauwen-audio-progress').offset().left;
+                lauwen_audio_obj.currentTime = ((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration).toFixed(2);
+            }
             lauwen_progress_status = false;
-            lauwen_audio_play_status = false;
-            var lauwen_bar_width = e.pageX -  $('#lauwen-audio-progress').offset().left;
-            lauwen_audio_obj.currentTime = ((lauwen_bar_width / lauwen_box_width) * lauwen_audio_obj.duration).toFixed(2);
         })
         lauwen_audio_obj.addEventListener('timeupdate', function (e) {
-            var lauwen_audio_current_time = lauwen_audio_obj.currentTime;
-            var lauwen_audio_duration = lauwen_audio_obj.duration;
-            $(".lauwen-audio-info-time").text(formatSeconds(lauwen_audio_current_time) + '/' + formatSeconds(lauwen_audio_duration));
-            var lauwen_temp_bar_width = (lauwen_audio_current_time / lauwen_audio_duration) * lauwen_box_width;
-            $('#lauwen-audio-progress-bar').css('width', lauwen_temp_bar_width);
-            
+            if (!lauwen_progress_status){
+                var lauwen_audio_current_time = lauwen_audio_obj.currentTime;
+                var lauwen_audio_duration = lauwen_audio_obj.duration;
+                $(".lauwen-audio-info-time").text(formatSeconds(lauwen_audio_current_time) + '/' + formatSeconds(lauwen_audio_duration));
+                var lauwen_temp_bar_width = (lauwen_audio_current_time / lauwen_audio_duration) * lauwen_box_width;
+                $('#lauwen-audio-progress-bar').css('width', lauwen_temp_bar_width);
+            }
         })
 
         var lauwen_volume_status = false;
