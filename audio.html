@@ -25,11 +25,23 @@
             padding: 0px;
             cursor: pointer;
         }
+        .lauwen-audio-progress-pointer{
+            width: 4px;
+            height: 4px;
+            border-radius: 2px;
+            display: block;
+            background-color: orangered;
+            position: absolute;
+            left:20%;
+        }
         .lauwen-audio-progress-bar{
             width: 0px;
             height: 4px;
             border-radius: 2px;
-            background-color: greenyellow;
+            background: -webkit-linear-gradient(left, #47CFFF , #1D81E4);
+            background: -o-linear-gradient(right, #47CFFF , #1D81E4);
+            background: -moz-linear-gradient(right, #47CFFF , #1D81E4);
+            background: linear-gradient(to right, #47CFFF , #1D81E4);
             position: relative;
         }
         .lauwen-audio-progress-cursor{
@@ -37,7 +49,7 @@
             height: 12px;
             border-radius: 6px;
             display: block;
-            background-color: red;
+            background-color: #1d83ec;
             position: absolute;
             top: -4px;
             right: -6px;
@@ -67,6 +79,15 @@
         .lauwen-audio-tools-bar{
             padding: 0px;
             flex: none
+        }
+        .lauwen-audio-tools-rate{
+            width: 50px;
+            height: 20px;
+            padding: 0px;
+            flex: none;
+            margin-top: 13px;
+            border-radius: 3px;
+            font-size: 12px;
         }
         .lauwen-audio-tools-bar>i{
             position: relative;
@@ -99,8 +120,8 @@
 </head>
 <body>
     <div class="container-fluid" style="margin-top: 15px;">
-        <audio src="./last_summer.mp3" autoplay id="audio" preload="auto" loop></audio>
-        <div class="col-md-10 col-md-offset-1">
+        <audio src="./last_summer.mp3" id="audio" preload="auto" loop></audio>
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body lauwen-audio-container">
                     <div class="col-md-7 lauwen-audio-progress-container" id="lauwen-audio-progress-container">
@@ -113,12 +134,37 @@
                             </div>
                         </div>
                         <div class="col-md-12 lauwen-audio-progress" id="lauwen-audio-progress">
+                                <div class="lauwen-audio-progress-pointer" 
+                                    data-toggle="tooltip" 
+                                    data-placement="top" 
+                                    title="却把书包中的日记更改"
+                                    data-time="60"></div>
+                                <div class="lauwen-audio-progress-pointer" 
+                                    data-toggle="tooltip" 
+                                    data-placement="top" 
+                                    title="小小狗也总会被打痛" data-time="111" style="left: 40%"></div>
+                                <div class="lauwen-audio-progress-pointer" 
+                                    data-toggle="tooltip" 
+                                    data-placement="top" 
+                                    title="是不同步的未来" data-time="149" style="left: 60%"></div>
+                                <div class="lauwen-audio-progress-pointer" 
+                                    data-toggle="tooltip" 
+                                    data-placement="top" 
+                                    title="把每次心痛都当成活该" data-time="192" style="left: 80%"></div>
                             <div class="lauwen-audio-progress-bar" id="lauwen-audio-progress-bar">
                                 <div class="lauwen-audio-progress-cursor"></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-5 lauwen-audio-control-container" id="lauwen-audio-control-container">
+                        <select class="lauwen-audio-tools-rate" id="lauwen-audio-tools-rate">
+                            <option>倍速</option>
+                            <option value="1">1.0X</option>
+                            <option value="1.5">1.5X</option>
+                            <option value="2">2.0X</option>
+                            <option value="2.5">2.5X</option>
+                            <option value="3">3.0X</option>
+                        </select>
                         <div class="lauwen-audio-tools-bar">
                             <i class="glyphicon glyphicon-step-backward lauwen-audio-prev"></i>
                             <b class="glyphicon glyphicon-play lauwen-audio-play"></b>
@@ -135,16 +181,13 @@
             </div>
         </div>
     </div>
-    <select class="form-control">
-        <option>1</option>
-        <option>1</option>
-        <option>1</option>
-    </select>
 </body>
 <script src="./jquery/jquery-3.3.1.min.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
 <script>
     var lauwen_audio_obj = document.getElementById('audio');
     $(function () { 
+        $('.lauwen-audio-progress-pointer').tooltip();
         var lauwen_progress_status = false;
         var lauwen_box_width = $("#lauwen-audio-progress").width();
         $('#lauwen-audio-progress').click(function (e) {
@@ -243,6 +286,9 @@
                 $(this).removeClass('glyphicon-volume-up');
                 $(this).addClass('glyphicon-volume-off');
             }
+        })
+        $(document).on("change", ".lauwen-audio-tools-rate", function () {
+            lauwen_audio_obj.playbackRate = $(this).val();
         })
     })
     function formatSeconds(value) {
