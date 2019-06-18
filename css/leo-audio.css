@@ -1,0 +1,120 @@
+.lauwen-audio-container{
+    padding: 0px;
+    -moz-user-select:none;
+    -webkit-user-select:none;
+    user-select:none;   
+}
+.lauwen-audio-progress-container{
+    padding: 15px;
+}
+.lauwen-audio-progress{
+    height: 4px;
+    margin: 4px 0px;
+    border-radius: 2px;
+    background-color: #f5f5f5;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    padding: 0px;
+    cursor: pointer;
+}
+.lauwen-audio-progress-pointer{
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    display: block;
+    background-color: orangered;
+    position: absolute;
+    left:20%;
+    z-index: 999;
+}
+.lauwen-audio-progress-bar, 
+.lauwen-audio-volume-bar
+{
+    width: 0px;
+    height: 4px;
+    border-radius: 2px;
+    background: -webkit-linear-gradient(left, #47CFFF , #1D81E4);
+    background: -o-linear-gradient(right, #47CFFF , #1D81E4);
+    background: -moz-linear-gradient(right, #47CFFF , #1D81E4);
+    background: linear-gradient(to right, #47CFFF , #1D81E4);
+    position: relative;
+}
+.lauwen-audio-progress-cursor,
+.lauwen-audio-volume-cursor
+{
+    width: 12px;
+    height: 12px;
+    border-radius: 6px;
+    display: block;
+    background-color: #1d83ec;
+    position: absolute;
+    top: -4px;
+    right: -6px;
+}
+
+.lauwen-audio-info{
+    display: flex;
+    padding: 0px 15px;
+}
+.lauwen-audio-info-title
+{
+    line-height: 33px;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.lauwen-audio-info-time{
+    text-align: right;
+    line-height: 33px;
+    flex: none;
+}
+.lauwen-audio-control-container{
+    display: flex;
+    padding: 15px;
+}
+.lauwen-audio-tools-bar{
+    padding: 0px;
+    flex: none
+}
+.lauwen-audio-tools-rate{
+    width: 50px;
+    height: 20px;
+    padding: 0px;
+    flex: none;
+    margin-top: 13px;
+    border-radius: 3px;
+    font-size: 12px;
+}
+.lauwen-audio-tools-bar>i{
+    position: relative;
+    top: -5px;
+    width: 30px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: #888888;
+    text-align: center;
+    font-size: 20px;
+}
+.lauwen-audio-tools-bar>b{
+    position: unset;
+    width: 30px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    color: #888888;
+    text-align: center;
+    font-size: 30px;
+}
+.lauwen-audio-volume{
+    width: 100%;
+    height: 4px;
+    margin-top: 20.5px;
+    padding: 0px;
+    border-radius: 2px;
+    background-color: #f5f5f5;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    padding: 0px;
+    cursor: pointer;
+    flex: 1;
+}

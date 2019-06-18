@@ -6,10 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>demo</title>
     <link href="./bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="./css/leo-audio.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
     <audio src="./last_summer.mp3" id="audioTest" preload="auto" loop></audio>
-    <div id="testContainer" style="width: 500px;height:150px;background-color:cornflowerblue;margin:0px auto"></div>
+    <div id="leo-audio" data-leoAudio style="width: 500px;background-color:cornflowerblue;margin:0px auto"></div>
 </body>
 <script src="./jquery/jquery-3.3.1.min.js"></script>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="./js/leo-audio.js"></script>
+<script>
+    $("#leo-audio").leoAudio("#audioTest", {
+        pointer: [
+            {
+                name: '却把书包中的日记更改',
+                time: 60,
+            },
+            {
+                name: '小小狗也总会被打痛',
+                time: 111,
+            },
+            {
+                name: '是不同步的未来',
+                time: 149,
+            },
+            {
+                name: '把每次心痛都当成活该',
+                time: 192,
+            },
+        ]
+    });
+</script>
 </html>
