@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>page-example</title>
-    <link href="./bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .lauwen-audio-container{
             padding: 0px;
@@ -131,10 +131,10 @@
 </head>
 <body>
     <div class="container-fluid" style="margin-top: 15px;">
-        <audio src="./last_summer.mp3" id="audio" preload="auto" loop></audio>
+        <audio src="./got_windy.mp3" id="audio" preload="auto" loop></audio>
         <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-body lauwen-audio-container">
+                <div class="panel-body lauwen-audio-container" style="background-color: orange">
                     <div class="col-md-7 lauwen-audio-progress-container" id="lauwen-audio-progress-container">
                         <div class="row lauwen-audio-info">
                             <div class="lauwen-audio-info-title">
@@ -193,8 +193,8 @@
         </div>
     </div>
 </body>
-<script src="./jquery/jquery-3.3.1.min.js"></script>
-<script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <script>
     var lauwen_audio_obj = document.getElementById('audio');
     $(function () { 

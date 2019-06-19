@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>demo</title>
-    <link href="./bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet"/>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/leo-audio.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
     <audio src="./last_summer.mp3" id="audioTest" preload="auto" loop></audio>
-    <div id="leo-audio" data-leoAudio style="width: 500px;background-color:cornflowerblue;margin:0px auto"></div>
+    <div id="leo-audio" class="container"></div>
 </body>
-<script src="./jquery/jquery-3.3.1.min.js"></script>
-<script src="./bootstrap/js/bootstrap.min.js"></script>
-<script src="./js/leo-audio.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="src/leo-audio.js"></script>
 <script>
     $("#leo-audio").leoAudio("#audioTest", {
+        name: "去年夏天 - 王大毛",
         pointer: [
             {
                 name: '却把书包中的日记更改',
@@ -34,7 +35,29 @@
                 name: '把每次心痛都当成活该',
                 time: 192,
             },
-        ]
+        ],
+        // theme: {
+        //     bgColor: "orange",
+        //     btnColor: "black",
+        //     progressColor : {
+        //         start : "#ffffff",
+        //         end : "#000000",
+        //         cursor : "yellow",
+        //         pointer : "blue",
+        //         bg : "red"
+        //     },
+        //     volumeColor : {
+        //         start : "#000",
+        //         end : "#fff",
+        //         cursor : "blue",
+        //         bg : "green"
+        //     },
+        //     rateColor : {
+        //         bg : "black",
+        //         font: "white",
+        //         border: "black"
+        //     }
+        // }
     });
 </script>
 </html>

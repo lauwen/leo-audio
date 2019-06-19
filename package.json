@@ -1,0 +1,24 @@
+{
+  "name": "leo-audio",
+  "version": "1.0.0",
+  "description": "the audio base on jq and bootstrap",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack --mode prodution"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauwen/leo-audio.git"
+  },
+  "author": "lauwen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lauwen/leo-audio/issues"
+  },
+  "homepage": "https://github.com/lauwen/leo-audio#readme",
+  "dependencies": {
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  }
+}
