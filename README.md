@@ -1,8 +1,8 @@
 # leo-audio
 The audio library based on jquery and bootstrap.
 
-#getting started
-##install
+# getting started
+## install
 ```
 <link href=".../bootstrap.min.css" type="text/css" rel="stylesheet">
 <link href=".../leo-audio.min.css" type="text/css" rel="stylesheet"/>
@@ -10,7 +10,7 @@ The audio library based on jquery and bootstrap.
 <script src=".../bootstrap.min.js"></script>
 <script src=".../leo-audio.min.js"></script>
 ```
-##example
+## example
 ```
 <audio src="./last_summer.mp3" id="audioTest" preload="auto" loop></audio>
 <div id="leo-audio" class="container"></div>
@@ -20,7 +20,7 @@ The audio library based on jquery and bootstrap.
     });
 </script>
 ```
-##audio options
+## audio options
 ```
     name : "Unknown-Audio",
     volume : 0.5,
