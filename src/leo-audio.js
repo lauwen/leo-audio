@@ -91,7 +91,7 @@
                                 </div>\
                             </div>\
                             <select class="lauwen-audio-tools-rate" id="lauwen-audio-tools-rate">\
-                                <option value="" disabled selected hidden>倍速</option>\
+                                <option value="" disabled selected hidden>rate</option>\
                                 <option value="1">1.0X</option>\
                                 <option value="1.5">1.5X</option>\
                                 <option value="2">2.0X</option>\
