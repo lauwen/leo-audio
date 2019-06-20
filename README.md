@@ -39,6 +39,7 @@ The audio library based on jquery and bootstrap.
 </script>
 ```
 ## default audio options
+You can configure all of these
 ```
     name : "Unknown-Audio",
     volume : 0.5,
