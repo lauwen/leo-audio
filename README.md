@@ -17,10 +17,28 @@ The audio library based on jquery and bootstrap.
 <script>
     $("#leo-audio").leoAudio("#audioTest", {
         name : "last_summer",
+        pointer: [
+            {
+                name: 'first pointer',
+                time: 60,
+            },
+            {
+                name: 'second pointer',
+                time: 111,
+            },
+            {
+                name: 'third pointer',
+                time: 149,
+            },
+            {
+                name: 'fourth pointer',
+                time: 192,
+            },
+        ]
     });
 </script>
 ```
-## audio options
+## default audio options
 ```
     name : "Unknown-Audio",
     volume : 0.5,
